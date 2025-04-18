@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Send email using Resend
-    const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
+    // Send email to you (the portfolio owner)
+    const ownerEmail = await resend.emails.send({
+      from: 'Portfolio Contact <contact@fenilvaghasiya.com>',
       to: 'fenilvaghasiya22@gmail.com',
       subject: `New Contact Form Submission: ${subject}`,
       html: `
@@ -32,8 +32,28 @@ export async function POST(request: NextRequest) {
       `,
     })
 
-    if (error) {
-      console.error('Error sending email:', error)
+    // Send acknowledgment email to the sender
+    const senderEmail = await resend.emails.send({
+      from: 'Fenil Vaghasiya <contact@fenilvaghasiya.com>',
+      replyTo: 'fenilvaghasiya22@gmail.com',
+      to: email,
+      subject: `Thank you for your message - ${subject}`,
+      html: `
+        <h2>Thank you for reaching out!</h2>
+        <p>Dear ${name},</p>
+        <p>I have received your message and will get back to you soon.</p>
+        <p>Here's a copy of your message:</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+        <br/>
+        <p>Best regards,</p>
+        <p>Fenil Vaghasiya</p>
+      `,
+    })
+
+    if (ownerEmail.error || senderEmail.error) {
+      console.error('Error sending emails:', ownerEmail.error || senderEmail.error)
       return NextResponse.json(
         { error: 'Failed to send email' },
         { status: 500 }
