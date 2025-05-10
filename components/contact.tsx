@@ -1,70 +1,13 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter } from "lucide-react"
+import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react"
 
 export default function Contact() {
   const { toast } = useToast()
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    try {
-      // Replace with your actual form submission logic
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to send message')
-      }
-
-      toast({
-        title: "Message sent successfully!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      })
-
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      })
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again later.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -93,14 +36,14 @@ export default function Contact() {
         viewport={{ once: true, amount: 0.1 }}
         variants={containerVariants}
       >
-        <motion.h2 variants={itemVariants} className="section-title">
+        <motion.h2 variants={itemVariants} className="section-title text-center">
           Get In Touch
         </motion.h2>
-        <motion.p variants={itemVariants} className="section-subtitle">
+        <motion.p variants={itemVariants} className="section-subtitle text-center max-w-xl mx-auto">
           Have a project in mind or want to chat? Feel free to reach out!
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-8 mt-12 max-w-2xl mx-auto">
           <motion.div variants={itemVariants}>
             <Card className="h-full">
               <CardContent className="p-6 flex flex-col h-full">
@@ -114,7 +57,7 @@ export default function Contact() {
                     <div>
                       <h4 className="font-medium">Email</h4>
                       <a
-                        href="mailto:your.email@example.com"
+                        href="mailto:fenilvaghasiya22@gmail.com"
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
                         fenilvaghasiya22@gmail.com
@@ -128,7 +71,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Phone</h4>
-                      <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
+                      <a href="tel:+917226017188" className="text-muted-foreground hover:text-primary transition-colors">
                         +91 7226017188
                       </a>
                     </div>
@@ -140,7 +83,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Location</h4>
-                      <p className="text-muted-foreground">Ahmedabad, Gujrat, India</p>
+                      <p className="text-muted-foreground">Ahmedabad, Gujarat, India</p>
                     </div>
                   </div>
                 </div>
@@ -166,81 +109,6 @@ export default function Contact() {
                     <span className="sr-only">GitHub</span>
                   </a>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <Card className="h-full">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-6">Send Me a Message</h3>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Name
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        placeholder="Your name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="Your email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">
-                      Subject
-                    </label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      placeholder="Subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Your message"
-                      rows={5}
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        Send Message <Send className="ml-2 h-4 w-4" />
-                      </>
-                    )}
-                  </Button>
-                </form>
               </CardContent>
             </Card>
           </motion.div>
