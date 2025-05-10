@@ -15,6 +15,15 @@ const projects = [
     liveUrl: "https://schedulingal.netlify.app",
     sourceUrl: "https://github.com/Fenil-Vaghasiya-22/Operating-System-Scheduler-Simulator",
   },
+  {
+    title: "Smart Crop Prediction",
+    description:
+      "Created a machine learning-based web app that predicts the most suitable crop to grow based on soil and environmental conditions like nitrogen, phosphorus, potassium, temperature, humidity, pH, and rainfall. Built with Python, Flask, and scikit-learn and deployed using Render.",
+    image: "/crop-predict.png", 
+    tech: ["Python", "Flask", "scikit-learn", "HTML", "CSS"],
+    liveUrl: "https://smart-crop-prediction-ejcu.onrender.com", 
+    sourceUrl: "https://github.com/Fenil-Vaghasiya-22/Smart-Crop-Prediction",
+  },
 ]
 
 export default function Projects() {
