@@ -25,6 +25,15 @@ const certificates = [
     "credentialUrl": "/c4ba0d11-48cc-4a91-b573-d819d73e770b (1).pdf",
     "skills": ["Machine Learning", "Deep Learning"]
 },
+{
+    "title": "Participation in \"Smart India Hackathon 2024\"",
+    "issuer": "Ecell Nirma University",
+    "date": "September 16, 2024",
+    "description": "For participating in the ‘Smart India Hackathon 2024 LOCAL ROUND’ organised by Ecell Nirma University.",
+    "image": "/image7.png",
+    "credentialUrl": "/Fenil Vaghasiya (1).pdf",
+    "skills": ["Problem Solving", "Teamwork", "Innovation"]
+},
 ]
 
 export default function Certificates() {
