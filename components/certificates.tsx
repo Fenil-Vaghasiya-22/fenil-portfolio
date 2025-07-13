@@ -16,6 +16,15 @@ const certificates = [
     credentialUrl: "/Frontend Fury-Vaghasiya Fenil Pankajbhai.pdf",
     skills: ["CSS"],
   },
+  {
+    "title": "Participation in \"Applications of Machine Learning and Deep Learning in Various Domains\"",
+    "issuer": "Department of Computer Science and Engineering, Nirma University",
+    "date": "August 12, 2024",
+    "description": "For participating in the National Seminar under Fulbright Program on \"Applications of Machine Learning and Deep Learning in Various Domains\" organized by the Department of Computer Science and Engineering, Nirma University",
+    "image": "/image6.png",
+    "credentialUrl": "/c4ba0d11-48cc-4a91-b573-d819d73e770b (1).pdf",
+    "skills": ["Machine Learning", "Deep Learning"]
+},
 ]
 
 export default function Certificates() {
